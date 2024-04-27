@@ -1,0 +1,16 @@
+syntax = "proto3";
+package im.constant;
+
+option go_package = "github.com/yanglunara/protocol/constant";
+
+enum constant {
+    operationID = 0;
+    opUserID = 1;
+    connID = 2;
+    opUserPlatform = 3;
+    token = 4;
+    customHeader = 5;
+    checkKey = 6;
+    triggerID = 7;
+    remoteAddr = 8;
+}

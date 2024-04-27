@@ -1,5 +1,6 @@
 PROTO_NAMES=(
     "auth"
+    "constant"
 )
 for name in "${PROTO_NAMES[@]}"; do
   protoc --go_out=./${name} --go_opt=module=github.com/yanglunara/protocol/${name} --go-grpc_out=./${name} --go-grpc_opt=module=github.com/yanglunara/protocol/${name} ${name}/${name}.proto
