@@ -1,0 +1,71 @@
+syntax = "proto3";
+package im.auth;
+option go_package = "github.com/yanglunara/protocol/auth";
+
+message UserTokenReq {
+    string secret = 1;
+    int32 platformID = 2;
+    string userID = 3;
+}
+
+message UserTokenResp {
+    string token = 1;
+    int64 expireTime = 2;
+}
+
+message ForceLogoutReq {
+    int32 platformID = 1;
+    string userID = 2;
+}
+
+message ForceLogoutResp {
+    bool success = 1;
+}
+
+message GetUserTokenReq {
+    int32 platformID = 1;
+    string userID = 2;
+}
+
+message GetUserTokenResp {
+    string token = 1;
+    int64 expireTime = 2;
+}
+
+message ParseTokenReq {
+    string token = 1;
+}
+
+message ParseTokenResp {
+    int32 platformID = 1;
+    string userID = 2;
+    int64 expireTime = 3;
+}
+
+message InvalidateTokenReq {
+    string preservedToken = 1;
+    string userID = 2;
+    int32 platformID = 3;
+}
+
+message InvalidateTokenResp {
+    bool success = 1;
+}
+
+// AuthService 定义了认证服务提供的 RPC 方法。
+service AuthService {
+    // UserToken 为用户生成一个新的令牌。
+    rpc UserToken(UserTokenReq) returns (UserTokenResp);
+
+    // ForceLogout 强制用户登出。
+    rpc ForceLogout(ForceLogoutReq) returns (ForceLogoutResp);
+
+    // GetUserToken 获取用户的令牌。
+    rpc GetUserToken(GetUserTokenReq) returns (GetUserTokenResp);
+
+    // ParseToken 解析令牌并获取关联的用户 ID 和平台 ID。
+    rpc ParseToken(ParseTokenReq) returns (ParseTokenResp);
+
+    // InvalidateToken 使令牌失效。
+    rpc InvalidateToken(InvalidateTokenReq) returns (InvalidateTokenResp);
+}
