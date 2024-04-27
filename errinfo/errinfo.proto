@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package im.protobuf;
+
+
+option go_package = "github.com/yanglunara/protocol/errinfo";
+
+message ErrorInfo{
+    string path = 1;
+    uint32 line = 2;
+    string name = 3;
+    string cause = 4;
+    repeated string warp = 5;
+}
